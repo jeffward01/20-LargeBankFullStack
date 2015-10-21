@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title> </title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="bower_components/animate.css/animate.min.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+    <div class="mainContainer">
+        <!--  Jumbotron  -->
+        <div class="jumbotron">
+            <h1 id="mainTitle">Large Bank Management System</h1>
+        </div>
+        <!--   Page header     -->
+        <div class="row">
+            <div class="page-header edit-customerHeader">
+                <h2>Edit Customer</h2>
+            </div>
+        </div>
+
+        <!--Form-->
+        <div class="row">
+            <form>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">First Name</label>
+                        <input type="text" class="form-control" id="inputFirstName" placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Last Name</label>
+                        <input type="text" class="form-control" id="InputLastNmae" placeholder="Last Name">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Address 1</label>
+                        <input type="text" class="form-control" id="InputAddress1" placeholder="Address 1">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Address 2</label>
+                        <input type="text" class="form-control" id="InputAddress2" placeholder="Address 2">
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">City</label>
+                            <input type="text" class="form-control" id="InputAddress1" placeholder="City">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">State</label>
+                            <input type="text" class="form-control" id="InputAddress2" placeholder="State">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Zip</label>
+                            <input type="text" class="form-control" id="InputAddress2" placeholder="Zip">
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <div class="row saveRow">
+            <!--        Button-->
+            <button id="saveBtn" type="submit" class="btn btn-success pull-right"><span id="saveCheck" class="glyphicon glyphicon-ok"></span>Save</button>
+        </div>
+        <div class="row">
+                <!--      Table  -->
+         <table class="table table-striped">
+            <thead>
+                <tr>
+
+                    <th>Account Number</th>
+                    <th>Balance</th>
+                 
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1000</td>
+                    <td>936.76</td>
+                </tr>
+                <tr>
+                <td>1001</td>
+                    <td>50034.43</td>
+                
+                </tr>
+
+
+            </tbody>
+        </table>
+        </div>
+
+
+    </div>
+
+
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/knockout/dist/knockout.js"></script>
+    <script src="bower_components/knockout-mapping/knockout.mapping.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/pageFlow.js"></script>
+</body>
+
+</html>

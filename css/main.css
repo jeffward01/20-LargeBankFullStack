@@ -23,7 +23,13 @@
 }
 
 /*Sub title*/
+#subtitleDiv{
+    margin-left: 20px;
+    padding-top: 20px;
+    margin-bottom: -20px;
+}
 #projectSubtitle{
+    
     font-style: italic;
 }
 
@@ -35,3 +41,33 @@
    margin-top: -4px;
 
 }
+
+
+
+/*Edit page*/
+.edit-customerHeader{
+    font-weight: bold;
+    padding-top: 20px;
+    border-bottom: 1px dotted white;
+}
+
+/*Save Button*/
+#saveCheck{
+    margin: 0 5px;
+}
+
+#saveBtn{
+    width: 120px;
+    text-align: center;
+    margin-top: 20px;
+    margin-right: 18px;
+    margin-bottom: 20px;
+}
+
+.saveRow{
+       border-bottom: 1px dotted white;
+}
+
+
+
+
