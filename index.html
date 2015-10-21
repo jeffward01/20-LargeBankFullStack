@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title> </title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="bower_components/animate.css/animate.min.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+    <div class="mainContainer">
+        <!--  Jumbotron  -->
+        <div class="jumbotron">
+            <h1 id="mainTitle">Large Bank Management System</h1><small id="projectSubtitle">A project by Jeff Ward   <br> <a href="mailto:jeff@jeffwarddevelopment.com">jeff@jeffwarddevelopment.com</a></small>
+
+        </div>
+
+        <!--   Page header     -->
+        <div class="row headerRow">
+            <div class="page-header">
+                <h1>Customers<small></small></h1>
+            </div>
+        </div>
+        <!--Add Customer Button -->
+        <div class="row pull-right" id="AddCustomerBtnRow">
+            <button type="button" id="AddCustomerBtn" class="btn btn-success">Add Customer</button>
+        </div>
+
+
+        <!--  Table  -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Address 1</th>
+                    <th>Address 2</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip</th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John</td>
+                    <td>Carter</td>
+                    <td>123 Merry Lane</td>
+                    <td>Suite 205</td>
+                    <td>San Diego</td>
+                    <td>Ca</td>
+                    <td>96754</td>
+                    <td>
+                        <button type="button" class="btn btn-primary editBtn">Edit</button>
+                        <button type="button" class="btn btn-danger deleteBtn">Delete</button>
+                    </td>
+                </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+
+
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/knockout/dist/knockout.js"></script>
+    <script src="bower_components/knockout-mapping/knockout.mapping.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/pageFlow.js"></script>
+</body>
+
+</html>

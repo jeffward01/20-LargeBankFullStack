@@ -1,0 +1,37 @@
+/*Main Container*/
+.mainContainer{
+    margin: 0 auto;
+    width: 85%;
+}
+
+/*Jumbotron*/
+.jumbotron{
+    margin-bottom: -50px;
+}
+
+/*Header Row*/
+.headerRow{
+    margin-bottom: -50px;
+    margin-top: 20px;
+}
+
+/*Text*/
+/*Title*/
+#mainTitle{
+    text-align: center;
+    margin: 0 auto;
+}
+
+/*Sub title*/
+#projectSubtitle{
+    font-style: italic;
+}
+
+
+/*Buttons*/
+
+.editBtn, .deleteBtn{
+    margin: 0 4px;
+   margin-top: -4px;
+
+}
