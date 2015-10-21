@@ -47,8 +47,8 @@
 /*Edit page*/
 .edit-customerHeader{
     font-weight: bold;
-    padding-top: 20px;
     border-bottom: 1px dotted white;
+    margin-top: -12px;
 }
 
 /*Save Button*/
@@ -69,5 +69,16 @@
 }
 
 
+/*Nav Bar*/
 
+.navbar{
+    background-color: dodgerblue;
+}
 
+#mainNav{
+    margin-top: 50px;
+}
+
+#editNavBar{
+    margin-top: 20px;
+}
