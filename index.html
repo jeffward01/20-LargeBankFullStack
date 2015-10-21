@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="bower_components/animate.css/animate.min.css" />
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="css/main.css" />
 </head>
 
@@ -40,7 +39,7 @@
             </div>
         </div>
         <!--Add Customer Button -->
-        <div class="row pull-right" id="AddCustomerBtnRow">
+        <div class="row pull-right" id="AddCustomerBtnRow" >
             <button type="button" id="AddCustomerBtn" class="btn btn-success">Add Customer</button>
         </div>
 
@@ -61,15 +60,15 @@
 
                 </tr>
             </thead>
-            <tbody>
+            <tbody data-bind="foreach: customers">
                 <tr>
-                    <td>John</td>
-                    <td>Carter</td>
-                    <td>123 Merry Lane</td>
-                    <td>Suite 205</td>
-                    <td>San Diego</td>
-                    <td>Ca</td>
-                    <td>96754</td>
+                    <td data-bind="text: FirstName">John</td>
+                    <td data-bind="text: LastName">Carter</td>
+                    <td data-bind="text: Address1">123 Merry Lane</td>
+                    <td data-bind="text: Address2">Suite 205</td>
+                    <td data-bind="text: City">San Diego</td>
+                    <td data-bind="text: States">Ca</td>
+                    <td data-bind="text: Zip">96754</td>
                     <td>
                         <button type="button" class="btn btn-primary editBtn">Edit</button>
                         <button type="button" class="btn btn-danger deleteBtn">Delete</button>
