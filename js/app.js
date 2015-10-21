@@ -70,3 +70,17 @@ function MyViewModel() {
 
 
 ko.applyBindings(new MyViewModel());
+
+
+//On Add Customer Click bring to edit screen
+$("#AddCustomerBtn").on('click',function(){
+    //alert("add customer button clicked");
+    window.location.href='edit.html';
+    
+    
+})//
+
+
+
+
+

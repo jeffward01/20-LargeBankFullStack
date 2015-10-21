@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title> </title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="bower_components/animate.css/animate.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+    <div class="mainContainer">
+        <!--  Jumbotron  -->
+        <div class="jumbotron">
+            <h1 id="mainTitle">Large Bank Management System</h1>
+            <div id="subtitleDiv"><small id="projectSubtitle">A project by Jeff Ward   <br> <a href="mailto:jeff@jeffwarddevelopment.com">jeff@jeffwarddevelopment.com</a></small></div>
+
+        </div>
+
+        <!--     nav Bar   -->
+        
+        <nav id="mainNav" class="navbar navbar-primary">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+     <ul class="nav navbar-nav navbar-right pull-right">
+        <li><a class="navbar-brand navbar-right pull-right"href="index.html">Home</a></li>
+      
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+        <!--   Page header     -->
+        <div class="row headerRow">
+            <div class="page-header">
+                <h1>Accounts for <span data-bind="text: FirstName"></span><small>Customer ID: <span data-bind="text: CustomerId"></span></small></h1>
+            </div>
+        </div>
+        <!--Add Customer Button -->
+        <div class="row pull-right" id="AddCustomerBtnRow" >
+            <button type="button" id="AddCustomerBtn" class="btn btn-success">Add Account</button>
+        </div>
+
+
+        <!--  Table  -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+
+                    <th>Account Number</th>
+                    <th>Balance</th>
+                    <th>Number of Transactions</th>
+                    <th></th>
+
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: customers">
+                <tr>
+                    <td data-bind="text: AccountNumber">1000</td>
+                    <td data-bind="text: Balance">1000000</td>
+                    <td data-bind="text TransactionsCount">X</td>
+                    <td>
+                        <button type="button" class="btn btn-primary editBtn">Edit</button>
+                        <button type="button" class="btn btn-danger deleteBtn">Delete</button>
+                        <button type="button" class="btn btn-warning viewTransactionsBtn">View Transactions</button>
+                    </td>
+                </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+
+
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/knockout/dist/knockout.js"></script>
+    <script src="bower_components/knockout-mapping/knockout.mapping.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/pageFlow.js"></script>
+</body>
+
+</html>
