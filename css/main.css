@@ -69,9 +69,16 @@
 }
 
 
-.viewAccounts{
-    padding-left:  20px;
-    
+
+
+#viewAccountsBtn{
+    margin-top: 20px; 
+    margin-right: 15px;
+    width: 160px;
+}
+
+#viewAccountsBtnText{
+    margin-right: 5px;
 }
 /*Nav Bar*/
 
