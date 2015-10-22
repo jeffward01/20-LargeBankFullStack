@@ -86,8 +86,22 @@
     width: 160px;
 }
 
+#editAccountsBtn{
+    margin-right: 15px;
+    margin-top: 20px;
+}
+
 #viewAccountsBtnText{
     margin-right: 5px;
+}
+
+#addAccountsBtn{
+    margin-top: 20px;
+    margin-right: 15px;
+    
+}
+#editAccountsBtnText{
+    margin-right:7px;
 }
 /*Nav Bar*/
 
@@ -102,3 +116,10 @@
 #editNavBar{
     margin-top: 20px;
 }
+
+
+/*accounts First Name*/
+#accountsLastName{
+    margin-right: 20px;
+}
+

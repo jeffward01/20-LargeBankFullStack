@@ -84,6 +84,7 @@
         //Naviage to add new Customer page
         self.addCustomer = function () {
             self.page('customer.add');
+            
         };
 
         //Edit a Customer
@@ -115,6 +116,7 @@
                 success: function(data) {                    
                     ko.mapping.fromJS(ko.mapping.toJS(customer), {}, self.selectedCustomer);
                     
+                    
                     ko.mapping.fromJS(data, {}, self.customersAccounts);                   
                 
                     
@@ -123,6 +125,22 @@
                 
                 
             })
+            
+        }
+        
+        self.displayCustomerAccountsModal = function (){
+                   $.ajax({
+                type: 'GET',
+                url: 'http://localhost:49690/api/customers/' + self.selectedCustomer.CustomerId() + '/accounts',
+                success: function(data) {                                       
+                    
+                    ko.mapping.fromJS(data, {}, self.customersAccounts);                   
+                
+                }
+                
+                
+            })
+            
             
         }
 
@@ -135,12 +153,13 @@
                     success: function (data) {
                         alert("Customer has been deleted");
                         
-                        self.reload.customers();
+                        self.reloadCustomers();
                     }
                 });
             }
         };
         
+        /*
     self.reload = function() {
         
         customers = function(){
@@ -152,11 +171,11 @@
      
                     self.page('customer.grid');
                 }
-            });
-            
+            });     
         }
         
     };
+      */  
 
         self.reloadCustomers = function() {
             //Populate Customer Grid with ALL Customers
@@ -170,8 +189,9 @@
                     self.page('customer.grid');
                 }
             });
+         
         }
-        
+           
         self.reloadCustomers();
       
             
