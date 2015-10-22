@@ -39,6 +39,7 @@
             </nav>
             <!--   Page header     -->
         </div>
+    </div>
         <div class="mainContainer">
         <div data-bind="visible: page() == 'customer.grid'">
             <div class="row headerRow">
@@ -144,9 +145,54 @@
                 </div>
                 <div class="row saveRow">
                     <!--        Button-->
-                    <button id="saveBtn" type="submit" class="btn btn-success pull-right"><span id="saveCheck" class="glyphicon glyphicon-ok"></span>Save</button>
+                    <button id="saveBtn" type="submit" class="btn btn-success pull-right" data-bind="click: $root.saveCustomer"><span id="saveCheck" class="glyphicon glyphicon-ok"></span>Save</button>
                     <button id="viewAccountsBtn" type="submit" data-bind="click: $root.viewCustomerAccounts" class="btn btn-warning pull-right"><span  class="glyphicon glyphicon-book" id="viewAccountsBtnText"></span> View Accounts</button>
                 </div>
+            </div>
+        </div>
+    
+        <!--  Accounts Page  -->
+        
+        <div id="accountsPage" data-bind="visible: page() == 'customer.accounts'">
+
+            <div class="mainContainer">
+                <!--  Jumbotron  -->
+        
+                <!--   Page header     -->
+                <div  id="accountsHeader"class="row headerRow">
+                    <div class="page-header">
+                        <h1>Accounts for <span data-bind="text: selectedCustomer.FirstName"></span> <span data-bind="text: selectedCustomer.LastName"></span><small>Customer ID: <span data-bind="text: selectedCustomer.CustomerId"></span></small></h1>
+                    </div>
+                </div>
+                <!--Add Customer Button -->
+                <div class="row pull-right" id="AddCustomerBtnRow">
+                    <button type="button" id="AddAccountBtn" class="btn btn-success">Add New Account</button>
+                </div>
+
+
+                <!--  Table  -->
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Account Number</th>
+                            <th>Balance</th>
+                            <th>Number of Transactions</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: customersAccounts">
+                        <tr>
+                            <td data-bind="text: AccountNumber">1000</td>
+                            <td data-bind="text: Balance">1000000</td>
+                            <td data-bind="text: TransactionsCount">X</td>
+                            <td>
+                                <button type="button" class="btn btn-primary editBtn" data-bind="click: $root.editCustomer">Edit</button>
+                                <button type="button" class="btn btn-danger deleteBtn" data-bind="click: $root.deleteCustomer">Delete</button>
+                                <button type="button" class="btn btn-warning viewTransactionsBtn">View Transactions</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
@@ -161,6 +207,8 @@
 
         <script src="js/app.js"></script>
         <script src="js/pageFlow.js"></script>
+        
+ 
 </body>
 
 </html>

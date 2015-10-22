@@ -34,6 +34,7 @@
         self.page = ko.observable('customer.grid');
 
         self.customers = ko.observableArray();
+        self.customersAccounts = ko.observableArray();
 
         self.page = ko.observable();
 
@@ -44,15 +45,16 @@
         //New Code Below this
 
         self.selectedCustomer = new CustomerModel();
+        self.AllAccountsForCustomer = new AccountModel();
         self.AllCustomers = new CustomerModel();
         self.selectedCustomerAccounts = ko.observableArray();
         self.saveCustomer = function () {
             if (self.page() == 'customer.add') {
                 $.ajax({
                     type: 'POST',
-                    url: 'http://localhost:49690/api/cutsomers',
+                    url: 'http://localhost:49690/api/customers',
                     contentType: 'application/json;charset=utf-8',
-                    data: ko.mapping.toJson(self.selectedCustomer),
+                    data: ko.mapping.toJSON(self.selectedCustomer),
                     success: function (data) {
                         alert("Added Customer");
 
@@ -63,9 +65,9 @@
             } else {
                 $.ajax({
                     type: 'PUT',
-                    url: 'http://localhost:49690/api/cutsomers?id=',
+                    url: 'http://localhost:49690/api/customers?id=' + self.selectedCustomer.CustomerId(),
                     contentType: 'application/json;charset=utf-8',
-                    data: ko.mapping.toJson(self.selectedCustomer),
+                    data: ko.mapping.toJSON(self.selectedCustomer),
                     success: function (data) {
                         alert("Save was successful!");
 
@@ -78,10 +80,14 @@
 
         //Customer Grid
         self.customers = ko.observableArray();
+        
+        //Naviage to add new Customer page
         self.addCustomer = function () {
             self.page('customer.add');
         };
 
+        //Edit a Customer
+        
         self.editCustomer = function (customer) {
             $.ajax({
                 type: 'GET',
@@ -101,7 +107,26 @@
                 }
             });
         };
+        
+        self.viewCustomerAccounts = function(customer) {
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:49690/api/customers/' + customer.CustomerId() + '/accounts',
+                success: function(data) {                    
+                    ko.mapping.fromJS(ko.mapping.toJS(customer), {}, self.selectedCustomer);
+                    
+                    ko.mapping.fromJS(data, {}, self.customersAccounts);                   
+                
+                    
+                    self.page('customer.accounts');
+                }
+                
+                
+            })
+            
+        }
 
+        //Delete A customer
         self.deleteCustomer = function (customer) {
             if (confirm("Are you sure you wish to delete this customer? This cannot be undone.")) {
                 $.ajax({
@@ -109,85 +134,56 @@
                     url: 'http://localhost:49690/api/customers?id=' + customer.CustomerId(),
                     success: function (data) {
                         alert("Customer has been deleted");
+                        
+                        self.reload.customers();
                     }
                 });
             }
         };
+        
+    self.reload = function() {
+        
+        customers = function(){
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:49690/api/customers/',
+                success: function (data) {
+                    ko.mapping.fromJS(data, {}, self.customers);
+     
+                    self.page('customer.grid');
+                }
+            });
+            
+        }
+        
+    };
 
-        //Test Code Region Below
-      
-
+        self.reloadCustomers = function() {
+            //Populate Customer Grid with ALL Customers
             $.ajax({
                 type: 'GET',
                 url: 'http://localhost:49690/api/customers/',
                 success: function (data) {
                     ko.mapping.fromJS(data, {}, self.customers);
 
+                    
                     self.page('customer.grid');
                 }
             });
+        }
+        
+        self.reloadCustomers();
+      
+            
     };
 
 
     ko.applyBindings(new MyViewModel());
 
-    //My code below
-    /*
-    self.getAllCustomers = function () {
 
-        $.getJSON("http://localhost:49690/api/customers").done(function (data) {
-            self.error(false);
-            self.errorMessage('');
+//Add account information per customer
 
-            ko.mapping.fromJS(data, {}, self.customers);
-
-        });
-    };
-
-    self.viewCustomerAccounts = function (customerID) {
-        $.getJSON("http://localhost:49690/api/customers/" + customerID.CustomerId() + "/accounts/").done(function (data) {
-            window.location.href = 'accounts.html';
-            self.error(false);
-            self.errorMessage('');
-
-            ko.mapping.fromJS(data, {}, AccountModel);
-        });
-    };
-
-    self.currentCustomer = function (customerID) {
-        $.getJSON("http://localhost:49690/api/customers").done(function (data) {
-            self.error(false);
-            self.errorMessage('');
-
-            var custID = customerID.CustomerId() - 1;
-            data = data[custID];
-
-            ko.mapping.fromJS(data, CustomerModel);
-        });
-    };
-    self.getCurrentPage = function () {
-        return self.currentPage();
-    }
-
-
-
-
-
-    self.clear = function () {
-
-    };
-
-
-    //Dynamic calls
-    self.getAllCustomers();
-    self.currentCustomer();
-    self.getAllCustomers();
-    */
-
-
-
-
-
+    
 
 
 

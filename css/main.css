@@ -68,8 +68,17 @@
        border-bottom: 1px dotted white;
 }
 
+/*Accounts Header*/
+#accountsHeader{
+    margin-top: 50px;
+}
 
-
+/*Add accounts button*/
+#AddAccountBtn {
+    margin-top: 60px;
+    margin-right: 20px;
+    margin-bottom: -20px;
+}
 
 #viewAccountsBtn{
     margin-top: 20px; 
