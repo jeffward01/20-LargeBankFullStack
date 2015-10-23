@@ -105,17 +105,17 @@
                 <form>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">First Name</label>
-                            <input type="text" class="form-control" data-bind="value: selectedCustomer.FirstName" id="inputFirstName" placeholder="First Name">
+                            <label for="exampleInputEmail1">First Name<small class="req">*required</small></label>
+                            <input type="text" class="form-control" data-bind="value: selectedCustomer.FirstName" id="InputFirstName" placeholder="First Name">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Last Name</label>
-                            <input type="text" class="form-control" id="InputLastNmae" placeholder="Last Name" data-bind="value: selectedCustomer.LastName">
+                            <label for="exampleInputPassword1">Last Name<small class="req">*required</small></label>
+                            <input type="text" class="form-control" id="InputLastName" placeholder="Last Name" data-bind="value: selectedCustomer.LastName">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Address 1</label>
+                            <label for="exampleInputEmail1">Address 1<small class="req">*required</small></label>
                             <input type="text" class="form-control" id="InputAddress1" placeholder="Address 1" data-bind="value: selectedCustomer.Address1">
                         </div>
                         <div class="form-group">
@@ -124,20 +124,20 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">City</label>
-                                <input type="text" class="form-control" id="InputAddress1" placeholder="City" data-bind="value: selectedCustomer.City">
+                                <label for="exampleInputEmail1">City<small class="req">*required</small></label>
+                                <input type="text" class="form-control" id="InputCity" placeholder="City" data-bind="value: selectedCustomer.City">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">State</label>
-                                <input type="text" class="form-control" id="InputAddress2" placeholder="State" data-bind="value: selectedCustomer.States">
+                                <label for="exampleInputPassword1">State<small class="req">*required IE: 'CA' 'NV' 'MD'</small></label>
+                                <input type="text" class="form-control" id="InputState" placeholder="State" data-bind="value: selectedCustomer.States">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Zip</label>
-                                <input type="text" class="form-control" id="InputAddress2" placeholder="Zip" data-bind="value: selectedCustomer.Zip">
+                                <label for="exampleInputPassword1">Zip<small class="req">*required</small></label>
+                                <input type="text" class="form-control" id="InputZip" placeholder="Zip" data-bind="value: selectedCustomer.Zip">
                             </div>
                         </div>
                     </div>
@@ -145,8 +145,12 @@
             </div>
             <div class="row saveRow">
                 <!--        Button-->
+
                 <button id="saveBtn" type="submit" class="btn btn-success pull-right" data-bind="click: $root.saveCustomer"><span id="saveCheck" class="glyphicon glyphicon-ok"></span>Save</button>
+
                 <button class="btn btn-primary pull-right" id="editAccountsBtn" data-bind="visible: page() == 'customer.detail'"><span class="glyphicon glyphicon-pencil" id="editAccountsBtnText"></span>Edit Accounts</button>
+                <button id="cancelBtn" type="submit" class="btn btn-danger pull-right" data-bind="click: CustomerGrid"><span class="glyphicon glyphicon-remove" id="editAccountsBtnText"></span>Cancel</button>
+
 
                 <button data-bind="visible: page() == 'customer.detail', click: $root.displayCustomerAccountsModal" id="viewAccountsBtn" type="submit" data-toggle="modal" data-target="#myModal" class="btn btn-warning pull-right"><span class="glyphicon glyphicon-book" id="viewAccountsBtnText"></span> View Accounts</button>
             </div>
@@ -168,7 +172,7 @@
             </div>
             <!--Add Customer Button -->
             <div class="row pull-right" id="AddCustomerBtnRow">
-                <button type="button" id="AddAccountBtn" class="btn btn-success" data-bind="click: addAccount" data-toggle="modal" data-target="#addAccountModal" >Add New Account</button>
+                <button type="button" id="AddAccountBtn" class="btn btn-success" data-bind="click: addAccount" data-toggle="modal" data-target="#addAccountModal">Add New Account</button>
             </div>
 
 
@@ -242,7 +246,7 @@
 
     <!-- Add Accounts Modal -->
     <!-- Button trigger modal -->
-   
+
 
     <!-- Modal -->
     <div class="modal fade" id="addAccountModal" tabindex="-1" role="dialog" aria-labelledby="addAccountModal">
