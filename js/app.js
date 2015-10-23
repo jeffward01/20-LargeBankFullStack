@@ -77,89 +77,143 @@
             }
         };
 
+        self.saveNewAccount = function () {
+            //Validation to ensure both input boxes have numbers 
+            var InputAccountNumber = $('#InputAccountNumber').val();
+            var InputAccountBalance = $('#InputAccountBalance').val();
 
-        //Customer Grid
-        self.customers = ko.observableArray();
-        
-        //Naviage to add new Customer page
-        self.addCustomer = function () {
-            self.page('customer.add');
-            
-        };
+            //Remove all characters and symbols
+            InputAccountBalance = InputAccountBalance.replace(/[^\/\d]/g, '');
+            InputAccountNumber = InputAccountNumber.replace(/[^\/\d]/g, '');
 
-        //Edit a Customer
-        
-        self.editCustomer = function (customer) {
-            $.ajax({
-                type: 'GET',
-                url: 'http://localhost:49690/api/customers/' + customer.CustomerId(),
-                success: function (data) {
-                    ko.mapping.fromJS(data, {}, self.selectedCustomer);
 
-                    $.ajax({
-                        type: 'GET',
-                        url: 'http://localhost:49690/api/customers/' + customer.CustomerId() + '/accounts',
-                        success: function (data) {
-                            ko.mapping.fromJS(data, {}, self.selectedCustomerAccounts);
 
-                            self.page('customer.detail');
-                        }
-                    });
-                }
-            });
-        };
-        
-        self.viewCustomerAccounts = function(customer) {
-            $.ajax({
-                type: 'GET',
-                url: 'http://localhost:49690/api/customers/' + customer.CustomerId() + '/accounts',
-                success: function(data) {                    
-                    ko.mapping.fromJS(ko.mapping.toJS(customer), {}, self.selectedCustomer);
-                    
-                    
-                    ko.mapping.fromJS(data, {}, self.customersAccounts);                   
-                
-                    
-                    self.page('customer.accounts');
-                }
-                
-                
-            })
-            
-        }
-        
-        self.displayCustomerAccountsModal = function (){
-                   $.ajax({
-                type: 'GET',
-                url: 'http://localhost:49690/api/customers/' + self.selectedCustomer.CustomerId() + '/accounts',
-                success: function(data) {                                       
-                    
-                    ko.mapping.fromJS(data, {}, self.customersAccounts);                   
-                
-                }
-                
-                
-            })
-            
-            
-        }
 
-        //Delete A customer
-        self.deleteCustomer = function (customer) {
-            if (confirm("Are you sure you wish to delete this customer? This cannot be undone.")) {
+
+            if (InputAccountBalance == "") {
+                $('#InputAccountBalance').addClass("red-border");
+            }
+            if (InputAccountNumber == "") {
+                $('#InputAccountNumber').addClass("red-border");
+            }
+            if (InputAccountBalance == "" || InputAccountNumber == "") {
+                alert("Please enter in both account number and balance.  Cannot be Null");
+                return;
+            }
+
+
+
+
+
+
+            if (self.page() == 'account.add') {
                 $.ajax({
-                    type: 'DELETE',
-                    url: 'http://localhost:49690/api/customers?id=' + customer.CustomerId(),
+                    type: 'POST',
+                    url: 'http://localhost:49690/api/customers/' + self.selectedCustomer.CustomerId() + '/accounts',
+                    contentType: 'application/json;charset=utf-8',
+                    data: ko.mapping.toJSON(self.selectedCustomerAccounts),
                     success: function (data) {
-                        alert("Customer has been deleted");
-                        
-                        self.reloadCustomers();
+                        alert("Saved new Account!");
+
+                        //Close Modal
+                        $('#addAccountModal').modal('hide');
+
+                        self.page('customer.accounts');
                     }
                 });
             }
-        };
-        
-        /*
+            alert("New Account Added! (Need Permission from API 'Error')");
+        }
+    
+
+
+    //Customer Grid
+    self.customers = ko.observableArray();
+
+    //Naviage to add new Customer page
+    self.addCustomer = function () {
+        self.page('customer.add');
+
+    };
+
+    //Navigate to add new Account Page
+    self.addAccount = function () {
+        self.page('account.add')
+    }
+
+    //Edit a Customer
+
+    self.editCustomer = function (customer) {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:49690/api/customers/' + customer.CustomerId(),
+            success: function (data) {
+                ko.mapping.fromJS(data, {}, self.selectedCustomer);
+
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://localhost:49690/api/customers/' + customer.CustomerId() + '/accounts',
+                    success: function (data) {
+                        ko.mapping.fromJS(data, {}, self.selectedCustomerAccounts);
+
+                        self.page('customer.detail');
+                    }
+                });
+            }
+        });
+    };
+
+    self.viewCustomerAccounts = function (customer) {
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:49690/api/customers/' + customer.CustomerId() + '/accounts',
+                success: function (data) {
+                    ko.mapping.fromJS(ko.mapping.toJS(customer), {}, self.selectedCustomer);
+
+
+                    ko.mapping.fromJS(data, {}, self.customersAccounts);
+
+
+                    self.page('customer.accounts');
+                }
+
+
+            })
+
+        }
+        //Displays all of current customer's account in Modal
+    self.displayCustomerAccountsModal = function () {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:49690/api/customers/' + self.selectedCustomer.CustomerId() + '/accounts',
+            success: function (data) {
+
+                ko.mapping.fromJS(data, {}, self.customersAccounts);
+
+            }
+
+
+        })
+
+
+    }
+
+    //Delete A customer
+    self.deleteCustomer = function (customer) {
+        if (confirm("Are you sure you wish to delete this customer? This cannot be undone.")) {
+            $.ajax({
+                type: 'DELETE',
+                url: 'http://localhost:49690/api/customers?id=' + customer.CustomerId(),
+                success: function (data) {
+                    alert("Customer has been deleted");
+
+                    self.reloadCustomers();
+                }
+            });
+        }
+    };
+
+    /*
     self.reload = function() {
         
         customers = function(){
@@ -175,36 +229,30 @@
         }
         
     };
-      */  
+      */
 
-        self.reloadCustomers = function() {
-            //Populate Customer Grid with ALL Customers
-            $.ajax({
-                type: 'GET',
-                url: 'http://localhost:49690/api/customers/',
-                success: function (data) {
-                    ko.mapping.fromJS(data, {}, self.customers);
+    self.reloadCustomers = function () {
+        //Populate Customer Grid with ALL Customers
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:49690/api/customers/',
+            success: function (data) {
+                ko.mapping.fromJS(data, {}, self.customers);
 
-                    
-                    self.page('customer.grid');
-                }
-            });
-         
-        }
-           
-        self.reloadCustomers();
-      
-            
+
+                self.page('customer.grid');
+            }
+        });
+
+    }
+
+    self.reloadCustomers();
+
+
     };
 
 
     ko.applyBindings(new MyViewModel());
 
 
-//Add account information per customer
-
-    
-
-
-
-
+    //Add account information per customer

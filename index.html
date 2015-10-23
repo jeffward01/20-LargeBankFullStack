@@ -146,8 +146,8 @@
             <div class="row saveRow">
                 <!--        Button-->
                 <button id="saveBtn" type="submit" class="btn btn-success pull-right" data-bind="click: $root.saveCustomer"><span id="saveCheck" class="glyphicon glyphicon-ok"></span>Save</button>
-                 <button class="btn btn-primary pull-right" id="editAccountsBtn" data-bind="visible: page() == 'customer.detail'"><span class="glyphicon glyphicon-pencil" id="editAccountsBtnText"></span>Edit Accounts</button>
-                
+                <button class="btn btn-primary pull-right" id="editAccountsBtn" data-bind="visible: page() == 'customer.detail'"><span class="glyphicon glyphicon-pencil" id="editAccountsBtnText"></span>Edit Accounts</button>
+
                 <button data-bind="visible: page() == 'customer.detail', click: $root.displayCustomerAccountsModal" id="viewAccountsBtn" type="submit" data-toggle="modal" data-target="#myModal" class="btn btn-warning pull-right"><span class="glyphicon glyphicon-book" id="viewAccountsBtnText"></span> View Accounts</button>
             </div>
         </div>
@@ -155,7 +155,7 @@
 
     <!--  Accounts Page  -->
 
-    <div id="accountsPage" data-bind="visible: page() == 'customer.accounts'">
+    <div id="accountsPage" data-bind="visible: page() == 'customer.accounts' || page() == 'account.add'">
 
         <div class="mainContainer">
             <!--  Jumbotron  -->
@@ -168,7 +168,7 @@
             </div>
             <!--Add Customer Button -->
             <div class="row pull-right" id="AddCustomerBtnRow">
-                <button type="button" id="AddAccountBtn" class="btn btn-success">Add New Account</button>
+                <button type="button" id="AddAccountBtn" class="btn btn-success" data-bind="click: addAccount" data-toggle="modal" data-target="#addAccountModal" >Add New Account</button>
             </div>
 
 
@@ -188,7 +188,7 @@
                         <td data-bind="text: Balance">1000000</td>
                         <td data-bind="text: TransactionsCount">X</td>
                         <td>
-                            <button type="button" class="btn btn-primary editBtn" data-bind="click: $root.editCustomer">Edit</button>
+                            <button type="button" class="btn btn-primary editBtn" data-bind="click: $root.editCustomer">Edit Customer</button>
                             <button type="button" class="btn btn-danger deleteBtn" data-bind="click: $root.deleteCustomer">Delete</button>
                             <button type="button" class="btn btn-warning viewTransactionsBtn">View Transactions</button>
                         </td>
@@ -233,6 +233,41 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Add Accounts Modal -->
+    <!-- Button trigger modal -->
+   
+
+    <!-- Modal -->
+    <div class="modal fade" id="addAccountModal" tabindex="-1" role="dialog" aria-labelledby="addAccountModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><span></span>Accounts for <span data-bind="text: selectedCustomer.FirstName"> </span> <span data-bind="text: selectedCustomer.LastName"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Account Number</label>
+                            <input type="text" class="form-control" id="InputAccountNumber" placeholder="Account Number" data-bind="value: customersAccounts.AccountNumber">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Balance</label>
+                            <input type="text" class="form-control" id="InputAccountBalance" placeholder="Balance" data-bind="value: customersAccounts.Balance">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bind="click: $root.saveNewAccount">Save changes</button>
                 </div>
             </div>
         </div>
