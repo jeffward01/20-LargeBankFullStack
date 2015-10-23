@@ -57,12 +57,13 @@
             validateColor($("#InputZip"));
             validateColor($("#InputState"));
             validateState($("#InputState"));
-           
-            var inputArray = [$("#InputFirstName"), $("#InputLastName"), $("#InputAddress1"), $("#InputAddress1"), $("#InputCity"), $("#InputZip") ];
-            
-           if(!validate(inputArray)){
-               return;
-           }
+
+            var inputArray = [$("#InputFirstName").val(), $("#InputLastName").val(), $("#InputAddress1").val(), $("#InputAddress1").val(), $("#InputCity").val(), $("#InputZip").val()];
+
+            if (validate(inputArray) == false) {
+                alert("Please fill in all the required boxes!")
+                return;
+            }
 
 
 
@@ -78,6 +79,8 @@
 
                         //Change Page
                         self.page('customer.grid')
+                        
+                       self.reloadCustomers();
                     }
                 });
             } else {
@@ -90,6 +93,7 @@
                         alert("Save was successful!");
 
                         self.page('customer.grid');
+                        self.reloadCustomers();
                     }
                 });
             }
@@ -145,6 +149,23 @@
 
         //Naviage to add new Customer page
         self.addCustomer = function () {
+             $("#InputFirstName").removeClass("red-border");
+            $("#InputLastName").removeClass("red-border");
+            $("#InputAddress1").removeClass("red-border");
+            $("#InputCity").removeClass("red-border");
+            $("#InputZip").removeClass("red-border");
+            $("#InputState").removeClass("red-border");
+            $("#InputState").removeClass("red-border");
+            
+            //remove any filling of input boxes here
+              $("#InputFirstName").val("");
+            $("#InputLastName").val("");
+            $("#InputAddress1").val("");
+            $("#InputCity").val("");
+            $("#InputZip").val("");
+            $("#InputState").val("");
+            $("#InputState").val("");
+            
             self.page('customer.add');
 
         };
@@ -163,6 +184,18 @@
         //Edit a Customer
 
         self.editCustomer = function (customer) {
+            //Remove Red
+              $("#InputFirstName").removeClass("red-border");
+            $("#InputLastName").removeClass("red-border");
+            $("#InputAddress1").removeClass("red-border");
+            $("#InputCity").removeClass("red-border");
+            $("#InputZip").removeClass("red-border");
+            $("#InputState").removeClass("red-border");
+            $("#InputState").removeClass("red-border");
+            
+            
+            
+            
             $.ajax({
                 type: 'GET',
                 url: 'http://localhost:49690/api/customers/' + customer.CustomerId(),
@@ -189,16 +222,11 @@
                     success: function (data) {
                         ko.mapping.fromJS(ko.mapping.toJS(customer), {}, self.selectedCustomer);
 
-
                         ko.mapping.fromJS(data, {}, self.customersAccounts);
-
-
                         self.page('customer.accounts');
+
                     }
-
-
                 })
-
             }
             //Displays all of current customer's account in Modal
         self.displayCustomerAccountsModal = function () {
@@ -210,13 +238,9 @@
                     ko.mapping.fromJS(data, {}, self.customersAccounts);
 
                 }
-
-
             })
-
-
         }
-        
+
         //Edit an Account
         self.editAccount = function (customer) {
             self.page()
@@ -286,41 +310,42 @@
             });
 
         }
-        self.CustomerGrid = function(){
+        self.CustomerGrid = function () {
             self.page('customer.grid')
         }
 
         self.reloadCustomers();
 
 
-    };
 
-    function validateColor(x) {
-        if ($(x).val() == "") {
-            $(x).addClass("red-border");
-        }
-    }
 
-    function validate(arr) {
-        for (var i = 0; i < arr.length; i++) {
-            if ($(arr[i].val() == "")) {
-                alert("Please fill in all of the required Inputs");
-                return false;
+        function validateColor(x) {
+            if ($(x).val() == "") {
+                $(x).addClass("red-border");
             }
         }
-    }
 
-    function validateState(y) {
-        x = $(y).val();
-        x = x.replace(/[^a-z\d\s]+/gi, "");
-        x = x.replace(/[0-9]/g, '');
-        if (x.length > 2) {
-            alert("Please enter the State in the correct Format!");
-            return;
+        function validate(arr) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] == "") {
+                    alert("Please fill in all of the required Inputs");
+                    return false;
+                }
+            }
         }
 
+        function validateState(y) {
+            x = $(y).val();
+            x = x.replace(/[^a-z\d\s]+/gi, "");
+            x = x.replace(/[0-9]/g, '');
+            if (x.length > 2) {
+                alert("Please enter the State in the correct Format!");
+                return;
+            }
 
 
+
+        }
     }
 
 
