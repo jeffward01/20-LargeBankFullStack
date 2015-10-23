@@ -138,6 +138,12 @@
 
     //Navigate to add new Account Page
     self.addAccount = function () {
+          //Clear Previous Red lines
+            $('#InputAccountBalance').removeClass("red-border");
+             $('#InputAccountNumber').removeClass("red-border");
+        
+        
+        
         self.page('account.add')
     }
 
