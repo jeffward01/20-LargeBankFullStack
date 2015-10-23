@@ -148,18 +148,19 @@
 
                 <button id="saveBtn" type="submit" class="btn btn-success pull-right" data-bind="click: $root.saveCustomer"><span id="saveCheck" class="glyphicon glyphicon-ok"></span>Save</button>
 
-                <button class="btn btn-primary pull-right" id="editAccountsBtn" data-bind="visible: page() == 'customer.detail'"><span class="glyphicon glyphicon-pencil" id="editAccountsBtnText"></span>Edit Accounts</button>
+                <button class="btn btn-primary pull-right" id="editAccountsBtn" data-bind="visible: page() == 'customer.detail, click: $root.displayCustomerAccountsModal'"><span class="glyphicon glyphicon-pencil" id="editAccountsBtnText"></span>Edit Accounts</button>
                 <button id="cancelBtn" type="submit" class="btn btn-danger pull-right" data-bind="click: CustomerGrid"><span class="glyphicon glyphicon-remove" id="editAccountsBtnText"></span>Cancel</button>
 
 
                 <button data-bind="visible: page() == 'customer.detail', click: $root.displayCustomerAccountsModal" id="viewAccountsBtn" type="submit" data-toggle="modal" data-target="#myModal" class="btn btn-warning pull-right"><span class="glyphicon glyphicon-book" id="viewAccountsBtnText"></span> View Accounts</button>
+                 <button type="button" id="AddAccountBtn2" class="btn btn-success pull-right" data-bind="click: addAccount" data-toggle="modal" data-target="#addAccountModal">Add New Account</button>
             </div>
         </div>
     </div>
 
     <!--  Accounts Page  -->
 
-    <div id="accountsPage" data-bind="visible: page() == 'customer.accounts' || page() == 'account.add'">
+    <div id="accountsPage" data-bind="visible: page() == 'customer.accounts' || page() == 'account.add' || page() == 'account.edit'">
 
         <div class="mainContainer">
             <!--  Jumbotron  -->
@@ -195,10 +196,12 @@
                             <button type="button" class="btn btn-primary editBtn" data-bind="click: $root.editCustomer">Edit Customer</button>
                             <button type="button" class="btn btn-danger deleteBtn" data-bind="click: $root.deleteCustomer">Delete</button>
                             <button type="button" class="btn btn-warning viewTransactionsBtn">View Transactions</button>
+                             <button type="button" class="btn btn-primary editBtn"  data-toggle="modal" data-target="#editAccountsModal" data-bind="click: $root.editAccount">Edit Account</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
+              <button id="cancelBtn" type="submit" class="btn btn-danger pull-right" data-bind="click: CustomerGrid"><span class="glyphicon glyphicon-remove" id="editAccountsBtnText"></span>Go Home</button>
         </div>
     </div>
 
@@ -243,6 +246,55 @@
     </div>
 
 
+    
+    
+    <!-- Edit Accounts Modal -->
+    <div class="modal fade" id="editAccountsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><span></span>Accounts for <span data-bind="text: selectedCustomer.FirstName"> </span> <span data-bind="text: selectedCustomer.LastName"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                     <div class="form-group" data-bind="foreach: customersAccounts">
+                                <label for="exampleInputPassword1">Account Number<small class="req">*required (Numbers Only)</small></label>
+                                <input type="text" class="form-control" id="InputState" placeholder="Account Number" data-bind="text: AccountNumber">
+                            </div>
+                         <div class="form-group" data-bind="foreach: customersAccounts">
+                                <label for="exampleInputPassword1">Account Balance<small class="req">*required (Numbers Only)</small></label>
+                                <input type="text" class="form-control" id="InputState" placeholder="Account Balance" data-bind="text: Balance">
+                            </div>
+                    
+                    </div>
+                    
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Account Number</th>
+                                <th>Balance</th>
+                                <th>Number of Transactions</th>
+
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: customersAccounts">
+                            <tr>
+                                <td data-bind="text: AccountNumber">1000</td>
+                                <td data-bind="text: Balance">1000000</td>
+                                <td data-bind="text: TransactionsCount">X</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Add Accounts Modal -->
     <!-- Button trigger modal -->

@@ -216,6 +216,28 @@
 
 
         }
+        
+        //Edit an Account
+        self.editAccount = function (customer) {
+            self.page()
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost:49690/api/customers/' + customer.CustomerId(),
+                success: function (data) {
+                    ko.mapping.fromJS(data, {}, self.selectedCustomer);
+
+                    $.ajax({
+                        type: 'GET',
+                        url: 'http://localhost:49690/api/customers/' + customer.CustomerId() + '/accounts',
+                        success: function (data) {
+                            ko.mapping.fromJS(data, {}, self.selectedCustomerAccounts);
+
+                            self.page('account.edit');
+                        }
+                    });
+                }
+            });
+        };
 
         //Delete A customer
         self.deleteCustomer = function (customer) {
